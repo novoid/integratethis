@@ -1,0 +1,170 @@
+* integratethis
+
+This tool integrates other tools in common programs.
+
+For example, I wrote some awesome Python command line tools such as
+[[https://github.com/novoid/filetags][filetags]], [[https://github.com/novoid/date2name][date2name]], or [[https://github.com/novoid/appendfilename][appendfilename]]. Once installed via =pip
+install=, they can only be used on the command line such as =cmd.exe=
+or a shell.
+
+Using this tool, I can integrate them for example to the "Send to"
+context menu of the Windows Explorer using commands like:
+
+: integratethis date2name
+: integratethis time2name
+: integratethis filetags --confirm
+: integratethis filetags --parameter="--tagtrees --tagtrees-depth 3" --displayname "TagTrees"
+: integratethis appendfilename --parameter="--verbose" --confirm
+
+Of course, you can remove them as well.
+
+- *Target group*: users who are fine to use command line tools
+- Hosted on github: [[https://github.com/novoid/integratethis]]
+
+** Installation
+
+This tool needs [[http://www.python.org/downloads/][Python 3 to be installed]].
+
+You can install filetags either via [[https://packaging.python.org/tutorials/installing-packages/][pip]] which is the recommended way.
+Or you can install filetags using the source code, e.g., by cloning
+the [[https://github.com/novoid/integratethis][GitHub repository of integratethis]].
+
+*** Installation Via Pip
+
+If you have installed Python 2 and Python 3 in parallel, make sure to
+use the correct pip version. You might need to use =pip3= instead of
+=pip=. If you only have Python 3 installed, you don't have to care ;-)
+
+On Microsoft Windows (only), you are going to need ~pip install
+pypiwin32~ as prerequisite.
+
+Now install filetags via [[https://pip.pypa.io/en/stable/][pip]]: ~pip install integratethis~
+
+You get updates by executing the very same pip command again.
+
+*** Installation Via Source Code
+
+If you use the GitHub sources (and not pip), the executable is
+~integratethis/__init__.py~. You might want to create a (symbolic) link named
+"integratethis" to that file.
+
+** Usage
+
+#+BEGIN_SRC sh :results output :wrap src
+./integratethis/__init__.py --help
+#+END_SRC
+
+#+BEGIN_src
+usage: ./integratethis/__init__.py [-h] [--overwrite] [--parameter PARAMETERS]
+                                   [--confirm] [--into PROGRAM]
+                                   [--displayname DISPLAYNAME] [--delete] [-v]
+                                   [-q]
+                                   command
+
+This program integrates arbitrary commands to various tools.
+For example, you can add a program named "filetags" to the "Send to"
+folder of the context menu of the Windows File explorer via
+    integratethis filetags
+
+The integration method used differs from tool to tool. For the Windows Explorer,
+a batch file is placed within the AppData\Roaming folder in case of additional
+parameters have to be added to the command and a lnk file to it is created in
+the "Send to" folder so that you can use the command from the context menu of
+the Windows Exporer. If no additional parameters are required, a lnk file to the
+command itself is placed in the "Send to" folder. For details, please look at
+the source code or read the help info for the --into parameter.
+
+You can overwrite pre-configured parameters using the command line options.
+
+positional arguments:
+  command               The command to integrate. For a defined set of tools
+                        which can be installed via "pip3 install", parameters
+                        are pre-configured: filetags, appendfilename,
+                        date2name, time2name (date2name but with time-stamp),
+                        and more to come in the future. The path for the
+                        command is looked up using "where" (Windows) or
+                        "which" (all other operating systems) so that the
+                        command has to be found in the path of the current
+                        environment.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --overwrite           Do not warn when a previous batch- or lnk-file for
+                        integration get overwritten.
+  --parameter PARAMETERS
+                        Optional parameter string which gets appended after
+                        the command when being invoked. For example,
+                        'filetags' as this pre-configured to "--interactive *"
+                        (on non-Windows) in order to use the interactive mode
+                        and operate on all selected files.
+  --confirm             Ask the user to confirm by pressing RETURN/ENTER
+                        before closing the dialog window of the batch file to
+                        run the command.
+  --into PROGRAM        Explicitely define, where to integrate the program to.
+                        Valid values (according to your operating system) are:
+                        windowsexplorer (same as File Explorer; default for
+                        Windows), and more to come in future.
+  --displayname DISPLAYNAME
+                        Optional name that should be used instead of the
+                        command name when being linked.
+  --delete              Instead of integrate the program, remove its
+                        integration. Command or displayname has to match the
+                        existing integration point.
+  -v, --verbose         enable verbose mode
+  -q, --quiet           enable quiet mode
+
+:copyright: (c) by Karl Voit <tools@Karl-Voit.at>
+:license: GPL v3 or any later version
+:URL: https://github.com/novoid/integratethis
+:bugreports: via github or <tools@Karl-Voit.at>
+:version: 2018-04-25
+·
+#+END_src
+
+** Changelog
+
+- 2018-04-25: initial version
+
+* Related tools and workflows
+
+This tool is part of a tool-set which I use to manage my digital files
+such as photographs. My work-flows are described in [[http://karl-voit.at/managing-digital-photographs/][this blog posting]]
+you might like to read.
+
+In short:
+
+For *tagging*, please refer to [[https://github.com/novoid/filetags][filetags]] and its documentation.
+
+See [[https://github.com/novoid/date2name][date2name]] for easily adding ISO *time-stamps or date-stamps* to
+files.
+
+For *easily naming and tagging* files within file browsers that allow
+integration of external tools, see [[https://github.com/novoid/appendfilename][appendfilename]] (once more) and
+[[https://github.com/novoid/filetags][filetags]].
+
+Moving to the archive folders is done using [[https://github.com/novoid/move2archive][move2archive]].
+
+Having tagged photographs gives you many advantages. For example, I
+automatically [[https://github.com/novoid/set_desktop_background_according_to_season][choose my *desktop background image* according to the
+current season]].
+
+Files containing an ISO time/date-stamp gets indexed by the
+filename-module of [[https://github.com/novoid/Memacs][Memacs]].
+
+* How to Thank Me
+
+I'm glad you like my tools. If you want to support me:
+
+- Send old-fashioned *postcard* per snailmail - I love personal feedback!
+  - see [[http://tinyurl.com/j6w8hyo][my address]]
+- Send feature wishes or improvements as an issue on GitHub
+- Create issues on GitHub for bugs
+- Contribute merge requests for bug fixes
+- Check out my other cool [[https://github.com/novoid][projects on GitHub]]
+
+* Local Variables                                                  :noexport:
+# Local Variables:
+# mode: auto-fill
+# mode: flyspell
+# eval: (ispell-change-dictionary "en_US")
+# End:
