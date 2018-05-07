@@ -12,9 +12,12 @@ context menu of the Windows Explorer using commands like:
 
 : integratethis date2name
 : integratethis time2name
-: integratethis filetags --confirm
-: integratethis filetags --parameter="--tagtrees --tagtrees-depth 3" --displayname "TagTrees"
 : integratethis appendfilename --parameter="--verbose" --confirm
+: integratethis filetags --confirm
+: integratethis filetags --parameter="--filter" --displayname "filetags filter"
+: integratethis filetags --parameter="--filter --recursive" --displayname "filetags filter recursive"
+: integratethis filetags --parameter="--tagtrees --recursive" --displayname "TagTrees recursive"
+: integratethis filetags --parameter="--tagtrees --tagtrees-depth 3" --displayname "TagTrees lvl3"
 
 Of course, you can remove them as well.
 
