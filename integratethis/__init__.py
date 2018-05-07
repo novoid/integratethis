@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-PROG_VERSION = "Time-stamp: <2018-04-25 18:21:38 karl.voit>"
+PROG_VERSION = "Time-stamp: <2018-05-07 16:57:42 karl.voit>"
 
 PROG_VERSION_DATE = PROG_VERSION[13:23]
 
@@ -257,6 +257,11 @@ def write_batchfile(batchfile, command_in_path, parameters, ask_for_confirmation
                   ', ' + str(parameters) + ', ' + str(ask_for_confirmation) + ')')
     logging.debug('writing file ' + batchfile + ' ...')
     with codecs.open(batchfile, 'w', encoding='utf-8') as outputhandle:
+        outputhandle.write('@ECHO OFF\n' +
+                           'REM change drive, e.g., D:\n' +
+                           '%~d1\n' +
+                           'REM change directory, e.g., D:\\data processing\\subdir\\\n' +
+                           'cd %~dp1\n\n\n')
         if parameters:
             outputhandle.write(command_in_path + ' ' + parameters + '\n\n')
         else:
