@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-PROG_VERSION = "Time-stamp: <2019-10-29 21:52:47 vk>"
+PROG_VERSION = "Time-stamp: <2019-10-29 22:06:31 vk>"
 
 PROG_VERSION_DATE = PROG_VERSION[13:23]
 
@@ -86,7 +86,7 @@ parser.add_argument("--parameter",
                     'when being invoked. For example, \'filetags\' as this pre-configured ' +
                     'to "--interactive *" (on non-Windows) in order to use the interactive mode and operate ' +
                     'on all selected files. Since this parameter replaces pre-defined parameter ' +
-                    'sets, you have to make sure to include \'%*\' (Windows) or \'"${*}"\' (non-Windows) if ' +
+                    'sets, you have to make sure to include \'%%*\' (Windows) or \'"${*}"\' (non-Windows) if ' +
                     'you need to process marked files.')
 
 parser.add_argument("--confirm",
