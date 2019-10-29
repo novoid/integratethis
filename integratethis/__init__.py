@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-PROG_VERSION = "Time-stamp: <2018-08-17 10:48:53 karl.voit>"
+PROG_VERSION = "Time-stamp: <2019-10-29 21:52:47 vk>"
 
 PROG_VERSION_DATE = PROG_VERSION[13:23]
 
@@ -34,6 +34,7 @@ import codecs
 
 from importlib import import_module
 
+
 def save_import(library):
     try:
         globals()[library] = import_module(library)
@@ -41,6 +42,7 @@ def save_import(library):
         print("Could not find Python module \"" + library +
               "\".\nPlease install it, e.g., with \"sudo pip install " + library + "\".")
         sys.exit(2)
+
 
 save_import('logging')
 save_import('argparse')   # for handling command line arguments
@@ -79,10 +81,13 @@ parser.add_argument("--overwrite",
 
 parser.add_argument("--parameter",
                     dest="parameter", nargs=1, metavar='PARAMETERS',
-                    help='Optional parameter string which gets appended after the command ' +
+                    help='Optional parameter string which replaces any pre-defined parameter ' +
+                    'set and gets appended after the command ' +
                     'when being invoked. For example, \'filetags\' as this pre-configured ' +
                     'to "--interactive *" (on non-Windows) in order to use the interactive mode and operate ' +
-                    'on all selected files.')
+                    'on all selected files. Since this parameter replaces pre-defined parameter ' +
+                    'sets, you have to make sure to include \'%*\' (Windows) or \'"${*}"\' (non-Windows) if ' +
+                    'you need to process marked files.')
 
 parser.add_argument("--confirm",
                     dest="ask_before_close_window", action="store_true",
@@ -410,6 +415,7 @@ def main():
         displayname_info = ''
     logging.info('Everything went fine, you can now use ' + command_in_path +
                  parameter_info + displayname_info + ' within ' + integrate_to + '.')
+
 
 if __name__ == "__main__":
     try:
