@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-PROG_VERSION = "Time-stamp: <2018-05-07 16:57:42 karl.voit>"
+PROG_VERSION = "Time-stamp: <2018-08-17 10:48:53 karl.voit>"
 
 PROG_VERSION_DATE = PROG_VERSION[13:23]
 
@@ -180,6 +180,10 @@ def determine_default_parameters_for_known_commands(command, user_command_parame
     """A simple look-up function that returns command, parameters and
     tool to integrate to for known, pre-defined commands."""
 
+    logging.debug('determine_default_parameters_for_known_commands(' + repr(command) + ', ' +
+                  repr(user_command_parameters) + ', ' +
+                  repr(user_into) + ', ' +
+                  repr(displayname) + ') called')
     command_in_path, command_parameters, batchfile, linkfile, integrate_to = False, False, False, False, False
 
     # the default destination paths for batchfile and linkfile
@@ -237,15 +241,22 @@ def determine_default_parameters_for_known_commands(command, user_command_parame
             command_parameters = '"${*}"'
             integrate_to = 'thunar'
 
-    # overwrite values if found in command line parameters:
     if user_command_parameters:
+        logging.debug('determine_default_parameters_for_known_commands(): overwrite values with given command line parameters')
         command_parameters = user_command_parameters
+
     if user_into:
         integrate_to = user_into
 
     if not command_parameters:
         batchfile = False  # just to make sure; this is not needed when there are no parameters
 
+    logging.debug('determine_default_parameters_for_known_commands returns: locate_command_in_path(command)[' +
+                  str(locate_command_in_path(command)) + '], command_parameters[' +
+                  str(command_parameters) + '], batchfile[' +
+                  str(batchfile) + '], linkfile[' +
+                  str(linkfile) + '], integrate_to[' +
+                  str(integrate_to) + ']')
     return locate_command_in_path(command), command_parameters, batchfile, linkfile, integrate_to
 
 
