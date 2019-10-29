@@ -12,7 +12,7 @@ context menu of the Windows Explorer using commands like:
 
 : integratethis date2name
 : integratethis time2name
-: integratethis appendfilename --parameter="--verbose" --confirm
+: integratethis appendfilename --confirm
 : integratethis filetags --confirm
 : integratethis filetags --parameter="--filter" --displayname "filetags filter"
 : integratethis filetags --parameter="--filter --recursive" --displayname "filetags filter recursive"
