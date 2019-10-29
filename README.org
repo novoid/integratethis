@@ -19,7 +19,12 @@ context menu of the Windows Explorer using commands like:
 : integratethis filetags --parameter="--tagtrees --recursive --tagtrees-handle-no-tag no-tags" --displayname "TagTrees recursive"
 : integratethis filetags --parameter="--tagtrees --tagtrees-depth 3" --displayname "TagTrees lvl3"
 
-Of course, you can remove them as well.
+Note that =integratethis time2name= is a shortcut for:
+
+: integratethis date2name  --parameter="--withtime %*" --displayname "time2name"
+
+Of course, you can remove the commands using the =--delete= parameter
+as well.
 
 - *Target group*: users who are fine to use command line tools
 - Hosted on github: [[https://github.com/novoid/integratethis]]
@@ -53,16 +58,16 @@ If you use the GitHub sources (and not pip), the executable is
 
 ** Usage
 
-#+BEGIN_SRC sh :results output :wrap src
-./integratethis/__init__.py --help
-#+END_SRC
+ # #+BEGIN_SRC sh :results output :wrap src
+ # python3 ./integratethis/__init__.py --help
+ # #+END_SRC
 
 #+BEGIN_src
-usage: ./integratethis/__init__.py [-h] [--overwrite] [--parameter PARAMETERS]
-                                   [--confirm] [--into PROGRAM]
-                                   [--displayname DISPLAYNAME] [--delete] [-v]
-                                   [-q]
-                                   command
+usage: integratethis [-h] [--overwrite] [--parameter PARAMETERS]
+                     [--confirm] [--into PROGRAM]
+                     [--displayname DISPLAYNAME] [--delete] [-v]
+                     [-q]
+                     command
 
 This program integrates arbitrary commands to various tools.
 For example, you can add a program named "filetags" to the "Send to"
@@ -95,11 +100,15 @@ optional arguments:
   --overwrite           Do not warn when a previous batch- or lnk-file for
                         integration get overwritten.
   --parameter PARAMETERS
-                        Optional parameter string which gets appended after
-                        the command when being invoked. For example,
-                        'filetags' as this pre-configured to "--interactive *"
-                        (on non-Windows) in order to use the interactive mode
-                        and operate on all selected files.
+                        Optional parameter string which replaces any pre-
+                        defined parameter set and gets appended after the
+                        command when being invoked. For example, 'filetags' as
+                        this pre-configured to "--interactive *" (on non-
+                        Windows) in order to use the interactive mode and
+                        operate on all selected files. Since this parameter
+                        replaces pre-defined parameter sets, you have to make
+                        sure to include '%*' (Windows) or '"${*}"' (non-
+                        Windows) if you need to process marked files.
   --confirm             Ask the user to confirm by pressing RETURN/ENTER
                         before closing the dialog window of the batch file to
                         run the command.
@@ -120,13 +129,15 @@ optional arguments:
 :license: GPL v3 or any later version
 :URL: https://github.com/novoid/integratethis
 :bugreports: via github or <tools@Karl-Voit.at>
-:version: 2018-04-25
+:version: 2019-10-29
 ·
 #+END_src
+
 
 ** Changelog
 
 - 2018-04-25: initial version
+- 2019-10-29: bugfix version
 
 * Related tools and workflows
 
