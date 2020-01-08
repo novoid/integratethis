@@ -279,9 +279,9 @@ def write_batchfile(batchfile, command_in_path, parameters, ask_for_confirmation
                            'REM change directory, e.g., D:\\data processing\\subdir\\\n' +
                            'cd %~dp1\n\n\n')
         if parameters:
-            outputhandle.write(command_in_path + ' ' + parameters + '\n\n')
+            outputhandle.write('"' + command_in_path + '" ' + parameters + '\n\n')
         else:
-            outputhandle.write(command_in_path + '\n\n')
+            outputhandle.write('"' + command_in_path + '"\n\n')
         if options.ask_before_close_window:
             logging.debug('options.ask_before_close_window is active: let\'s ask the user before closing command window')
             if IS_WINDOWS:
