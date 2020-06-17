@@ -7,6 +7,10 @@ For example, I wrote some awesome Python command line tools such as
 install=, they can only be used on the command line such as =cmd.exe=
 or a shell.
 
+To install all the supported tools, use the following command:
+
+: pip install date2name appendfilename filetags integratethis
+
 Using this tool, I can integrate them for example to the "Send to"
 context menu of the Windows Explorer using commands like:
 
