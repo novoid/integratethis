@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-PROG_VERSION = "Time-stamp: <2019-10-29 22:06:31 vk>"
+PROG_VERSION = "Time-stamp: <2024-01-13 18:27:06 vk>"
 
 PROG_VERSION_DATE = PROG_VERSION[13:23]
 
@@ -35,7 +35,7 @@ import codecs
 from importlib import import_module
 
 
-def save_import(library):
+def safe_import(library):
     try:
         globals()[library] = import_module(library)
     except ImportError:
@@ -44,8 +44,8 @@ def save_import(library):
         sys.exit(2)
 
 
-save_import('logging')
-save_import('argparse')   # for handling command line arguments
+safe_import('logging')
+safe_import('argparse')   # for handling command line arguments
 
 IS_WINDOWS = platform.system() == 'Windows'
 
