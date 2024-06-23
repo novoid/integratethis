@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-PROG_VERSION = "Time-stamp: <2024-01-13 18:27:06 vk>"
+PROG_VERSION = "Time-stamp: <2024-06-23 18:03:29 vk>"
 
 PROG_VERSION_DATE = PROG_VERSION[13:23]
 
@@ -71,6 +71,7 @@ parser.add_argument(dest="command", metavar='command', nargs=1, help='The comman
                     "appendfilename, " +
                     "date2name, " +
                     "time2name (date2name but with time-stamp), " +
+                    "move2archive, " +
                     "and more to come in the future. The path for the command is looked up " +
                     "using \"where\" (Windows) or \"which\" (all other operating systems) so that " +
                     "the command has to be found in the path of the current environment.")
@@ -232,7 +233,7 @@ def determine_default_parameters_for_known_commands(command, user_command_parame
             command_parameters = '--withtime "${*}"'
             integrate_to = 'thunar'
 
-    elif command in ['appendfilename', 'date2name']:
+    elif command in ['appendfilename', 'date2name', 'move2archive']:
         if IS_WINDOWS:
             command_parameters = '%*'
             integrate_to = 'windowsexplorer'
