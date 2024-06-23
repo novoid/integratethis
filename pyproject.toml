@@ -1,0 +1,31 @@
+[project]
+readme = "README.org"
+license = {file = "LICENSE.txt"}
+keywords = ["Windows", "scripts", "context menu", "installation", "integration"]
+authors = [{name="Karl Voit", email="tools@Karl-Voit.at"}]
+
+[tool.poetry]
+name = "integratethis"
+version = "2024.06.23.1"
+description = "Integrate programs or scripts into common tools like Windows Explorer context menu"
+authors = ["Karl Voit <tools@Karl-Voit.at>"]
+license = "GPL v3"
+readme = "README.org"
+
+[project.urls]
+Homepage = "https://github.com/novoid/integratethis"
+Repository = "https://github.com/novoid/integratethis"
+Issues = "https://github.com/novoid/integratethis/issues"
+
+[project.scripts]
+integratethis="integratethis:main"
+[tool.poetry.scripts]
+integratethis="integratethis:main"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
